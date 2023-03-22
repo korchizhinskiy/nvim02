@@ -1,0 +1,290 @@
+  {
+  "Solid Functional Component": {
+    "prefix": "scomp",
+    "body": [
+      "\n function ${1:${TM_FILENAME_BASE}}() {\n\n\treturn (\n\t\t<div>${1:${TM_FILENAME_BASE}}</div>\n\t);\n}\n\texport default ${1:${TM_FILENAME_BASE}};"
+    ],
+    "description": "Base for an empty solidJS component"
+  },
+  
+  "Input two-way binding": {
+    "prefix": "sinput",
+    "body": [
+      "<input type=\"${1:text}\" value={${2:value}()} onInput={e => ${3:setValue}(e.currentTarget.value)}/>"
+    ],
+    "description": "Input two-way binding"
+  },
+
+  "Solid empty function component": {
+    "prefix": "scomp",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE}}: Component<{$2}> = (props) => {",
+      "  $0",
+      "  return <div></div>;",
+      "};"
+    ],
+    "description": "Solid empty function component"
+  },
+  "Solid empty Parent Component": {
+    "prefix": "spcomp",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE}}: ParentComponent<{$2}> = (props) => {",
+      "  $0",
+      "  return <div>{props.children}</div>;",
+      "};"
+    ],
+    "description": "Solid empty Parent Component"
+  },
+  "Solid empty Flow Component": {
+    "prefix": "sfcomp",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE}}: FlowComponent<{$2}, ${3:JSX.Element}> = (props) => {",
+      "  $0",
+      "  return <div>{props.children}</div>;",
+      "};"
+    ],
+    "description": "Solid empty Flow Component"
+  },
+  "Solid empty Void Component": {
+    "prefix": "svcomp",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE}}: VoidComponent<{$2}> = (props) => {",
+      "  $0",
+      "  return <div></div>;",
+      "};"
+    ],
+    "description": "Solid empty Void Component"
+  },
+  "Solid empty function component. With Imports": {
+    "prefix": "scompi",
+    "body": [
+      "import { Component } from \"solid-js\";",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}: Component<{$2}> = (props) => {",
+      "  $0",
+      "  return <div></div>;",
+      "};"
+    ],
+    "description": "Solid empty function componen. With Importst"
+  },
+  "Solid empty Parent Component. With Imports": {
+    "prefix": "spcompi",
+    "body": [
+      "import { ParentComponent } from \"solid-js\";",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}: ParentComponent<{$2}> = (props) => {",
+      "  $0",
+      "  return <div>{props.children}</div>;",
+      "};"
+    ],
+    "description": "Solid empty Parent Component. With Imports"
+  },
+  "Solid empty Flow Component. With Imports": {
+    "prefix": "sfcompi",
+    "body": [
+      "import { FlowComponent, JSX } from \"solid-js\";",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}: FlowComponent<{$2}, ${3:JSX.Element}> = (props) => {",
+      "  $0",
+      "  return <div>{props.children}</div>;",
+      "};"
+    ],
+    "description": "Solid empty Flow Component. With Imports"
+  },
+  "Solid empty Void Component. With Imports": {
+    "prefix": "svcompi",
+    "body": [
+      "import { VoidComponent } from \"solid-js\";",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}: VoidComponent<{$2}> = (props) => {",
+      "  $0",
+      "  return <div></div>;",
+      "};"
+    ],
+    "description": "Solid empty Void Component. With Imports"
+  },
+  "Component extending an HTML Element": {
+    "prefix": "shtmlcomp",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE}}: ParentComponent<",
+      "  ComponentProps<\"${2:div}\"> & {",
+      "    $0",
+      "  }",
+      "> = (props) => {",
+      "  const [local, attrs] = splitProps(props, []);",
+      "",
+      "  return <${2:div} {...attrs}>{props.children}</${2:div}>;",
+      "};"
+    ],
+    "description": "Component extending an HTML Element"
+  },
+  "Component extending an HTML Element. With Imports": {
+    "prefix": "shtmlcompi",
+    "body": [
+      "import { ParentComponent, splitProps, ComponentProps } from \"solid-js\";",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}: ParentComponent<",
+      "  ComponentProps<\"${2:div}\"> & {",
+      "    $0",
+      "  }",
+      "> = (props) => {",
+      "  const [local, attrs] = splitProps(props, []);",
+      "",
+      "  return <${2:div} {...attrs}>{props.children}</${2:div}>;",
+      "};"
+    ],
+    "description": "Component extending an HTML Element. With Imports"
+  },
+
+  "Solid Context Provider component": {
+    "prefix": "sctxp",
+    "body": [
+      "import { createContext, createSignal, useContext } from \"solid-js\";",
+      "",
+      "const ${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/capitalize}/i}Context = createContext();",
+      "",
+      "export function ${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/capitalize}/i}Provider(props) {",
+      "  const [${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/downcase}/i}, set${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/capitalize}/i}] = createSignal(props.${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/downcase}/i} || \"\"),",
+      "    store = [${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/downcase}/i}, set${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/capitalize}/i}];",
+      "",
+      "  return (",
+      "    <${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/capitalize}/i}Context.Provider value={store}>{props.children}</${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/capitalize}/i}Context.Provider>",
+      "  );",
+      "}",
+      "",
+      "export function use${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/capitalize}/i}() {",
+      "  return useContext(${TM_FILENAME_BASE/(.*?)\\Context.*/${1:/capitalize}/i}Context);",
+      "}"
+    ],
+    "description": "Solid Context Provider component"
+},
+
+  "Solid Context Provider component": {
+    "prefix": "sctxp",
+    "body": [
+      "import { createContext, useContext, ParentComponent } from \"solid-js\";",
+      "import { createStore } from \"solid-js/store\";",
+      "",
+      "const defaultState = {};",
+      "",
+      "const ${1:Name}Context = createContext<[state: typeof defaultState, actions: {}]>([",
+      "  defaultState,",
+      "  {},",
+      "]);",
+      "",
+      "export const ${1/(.*)/${1:/capitalize}/}Provider: ParentComponent = (props) => {",
+      "  const [state, setState] = createStore(defaultState);",
+      "",
+      "  return (",
+      "    <${1/(.*)/${1:/capitalize}/}Context.Provider value={[state, {}]}>",
+      "      {props.children}",
+      "    </${1/(.*)/${1:/capitalize}/}Context.Provider>",
+      "  );",
+      "};",
+      "",
+      "export const use${1/(.*)/${1:/capitalize}/} = () => useContext(${1/(.*)/${1:/capitalize}/}Context);",
+      ""
+    ],
+    "description": "Solid Context Provider component"
+},
+
+  "Simple createSignal": {
+    "prefix": "ssig",
+    "body": ["const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = createSignal(${2});"],
+    "description": "Simple createSignal"
+  },
+  "Simple createEffect": {
+    "prefix": "seff",
+    "body": ["createEffect(() => {", "  const value = ${1:source}();", "  $0", "});"],
+    "description": "Simple createEffect"
+  },
+  "createEffect with explicit sources": {
+    "prefix": "seffon",
+    "body": ["createEffect(on(${1: source}, (value, prev) => {", "  $0", "}));"],
+    "description": "createEffect with explicit sources"
+  },
+  "Simple createMemo": {
+    "prefix": "smemo",
+    "body": ["const ${1:value} = createMemo(() => $0);"],
+    "description": "Simple createMemo"
+  },
+  "createMemo with explicit sources": {
+    "prefix": "smemoon",
+    "body": ["const ${1:value} = createMemo(on(${2:value}, (value, prev) => $0));"],
+    "description": "createMemo with explicit sources"
+  },
+
+  "Solid const component": {
+    "prefix": "sac",
+    "body": [
+      "import { Component } from 'solid-js';",
+      "\r",
+      "const ${TM_FILENAME_BASE}: Component = () => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t<h2>${TM_FILENAME_BASE}</h2>",
+      "\t\t</div>",
+      "\t)",
+      "}",
+      "\r",
+      "export default ${TM_FILENAME_BASE};"
+    ],
+    "description": "Solid - create const component"
+  },
+  "Solid const types component": {
+    "prefix": "sat",
+    "body": [
+      "import { Component, ComponentProps } from 'solid-js';",
+      "\r",
+      "interface ${TM_FILENAME_BASE}Props extends ComponentProps<any> {",
+      "\t// add props here",
+      "}",
+      "\r",
+      "const ${TM_FILENAME_BASE}: Component<${TM_FILENAME_BASE}Props> = (props: ${TM_FILENAME_BASE}Props) => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t<h2>${TM_FILENAME_BASE}</h2>",
+      "\t\t</div>",
+      "\t)",
+      "}",
+      "\r",
+      "export default ${TM_FILENAME_BASE};"
+    ],
+    "description": "Solid - create const types component"
+  },
+  "Solid function component": {
+    "prefix": "sfc",
+    "body": [
+      "function ${TM_FILENAME_BASE}() {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t<h2>${TM_FILENAME_BASE}</h2>",
+      "\t\t</div>",
+      "\t)",
+      "}",
+      "\r",
+      "export default ${TM_FILENAME_BASE};"
+    ],
+    "description": "Solid - create function component"
+  },
+  "Solid function types component": {
+    "prefix": "sft",
+    "body": [
+      "interface ${TM_FILENAME_BASE}Props {",
+      "\t// add props here",
+      "}",
+      "\r",
+      "function ${TM_FILENAME_BASE}(props: ${TM_FILENAME_BASE}Props) {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t<h2>${TM_FILENAME_BASE}</h2>",
+      "\t\t</div>",
+      "\t)",
+      "}",
+      "\r",
+      "export default ${TM_FILENAME_BASE};"
+    ],
+    "description": "Solid - create function typescript component"
+  }
+}
+
